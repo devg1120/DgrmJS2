@@ -1,0 +1,12 @@
+
+
+***** shape  edge
+
+./shapes/shape-evt-proc.js
+
+function shapeCreate
+
+                //.map(cc => `<circle data-key="${cc[0]}" data-connect="${cc[1].dir}"   class="hovertrack" data-evt-index="2" r="10" cx="0" cy="0" style="transform: translate(${cc[1].position.x}px, ${cc[1].position.y}px);" />`)
+
+### ToDo resize
+shape-evt-proc.js
