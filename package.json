@@ -6,7 +6,9 @@
     "lint": "eslint src/**/*.js",
     "tscheck": "node_modules\\.bin\\tsc --noEmit -p ./jsconfig.json",
     "startdemo": "web-dev-server --node-resolve --open demo/ --port 4200 --watch",
-    "start": "web-dev-server --node-resolve --open src/ --port 4200 --watch",
+    "start": "web-dev-server --host 0.0.0.0  --node-resolve --open src/ --port 4200 --watch",
+    "startremote" : "web-dev-server --root-dir src/  --port 4200 --watch ",
+
     "build": "rollup -c rollup.app.config.js"
   },
   "author": "Alexey Boyko",

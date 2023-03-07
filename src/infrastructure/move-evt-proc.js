@@ -19,10 +19,12 @@ export function moveEvtProc(elemTrackOutdown, elem, canvasScale, shapePosition, 
 
 	/** @param {PointerEventFixMovement} evt */
 	function move(evt) {
-		console.log("move");
+		//console.log("move");
+		//console.log(evt);
 		if (!isInit) { return; }
 
 		if (!isMoved) {
+		        //console.log("onMoveStart");
 			onMoveStart(evt);
 
 			// if reset
@@ -31,6 +33,7 @@ export function moveEvtProc(elemTrackOutdown, elem, canvasScale, shapePosition, 
 
 		movementApplay(shapePosition, canvasScale.scale, evt);
 		isMoved = true;
+		//console.log("onMove");
 		onMove(evt);
 	}
 

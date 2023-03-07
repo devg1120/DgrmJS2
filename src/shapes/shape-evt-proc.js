@@ -146,8 +146,63 @@ function shapeEvtProc(svg, canvasData, svgGrp, shapeData, connectorsInnerPositio
 	/** @type { Set<PathElement> } */
 	const paths = new Set();
 
-	function drawPosition() {
-		console.log("onMove");
+	function drawPosition(evt) {
+		
+          if (evt == undefined) return;
+
+	  if (evt.ctrlKey) {
+	      // shape resize 
+	      const connectorKey = evt.target.getAttribute('data-connect');
+	      const position = pointInCanvas(canvasData, evt.clientX, evt.clientY);
+	      switch(connectorKey) {
+                   case 'top':
+                     console.log('top');
+	      		//shapeData.position.x = 0; 
+	      		//shapeData.position.y = 0;
+	      		//shapeData.position.x -= 1; 
+	      		//shapeData.position.y -= 1;
+	      		//shapeData.width  = 200;
+	      		//shapeData.height = 200;
+	      		//drawPosition();
+	          var circles = svgGrp.getElementsByTagName("circle");
+                    console.log(circles);
+                 
+                  for (let i = 0; i < circles.length; i++) {
+                    //console.log(circles[i]);
+                    console.log(circles[i].getAttribute("data-key"));
+                    if (circles[i].getAttribute("data-key") == "main") {
+                           console.log(circles[i]);
+                          var r = Number(circles[i].getAttribute("r"));
+                          circles[i].setAttribute("r",  r + 1);
+                    
+                    } else if (circles[i].getAttribute("data-key") == "top") {
+                           console.log(circles[i]);
+                          var cy = Number(circles[i].getAttribute("cy"));
+                          circles[i].setAttribute("cy",  cy - 1);
+                    }
+                     //        my_circle.setAttribute("r", my_r * n);
+                   
+                  }
+                  //circles.forEach(function(element){
+                  //    console.log(element);
+                  //});
+
+                     break;
+                   case 'bottom':
+                     console.log('bottom');
+                     break;
+                   case 'right':
+                     console.log('right');
+                     break;
+                   case 'left':
+                     console.log('left');
+                     break;
+                   default:
+                     console.log('none');
+              }
+
+	  } else {
+	  
 		svgGrp.style.transform = `translate(${shapeData.position.x}px, ${shapeData.position.y}px)`;
 
 		// paths
@@ -161,6 +216,8 @@ function shapeEvtProc(svg, canvasData, svgGrp, shapeData, connectorsInnerPositio
 		for (const path of paths) {
 			path[PathSmbl].draw();
 		}
+	 }
+		
 	};
 
 	function unSelect() {
@@ -186,64 +243,11 @@ function shapeEvtProc(svg, canvasData, svgGrp, shapeData, connectorsInnerPositio
 			console.log("connectorKey", connectorKey)
 			if (connectorKey) {
 				
-				moveProcReset();
+			//	moveProcReset();
 
-			  if (evt.ctrlKey) {
-
-				/* shape resize */
-					const position = pointInCanvas(canvasData, evt.clientX, evt.clientY);
-				        //console.log("shapeData", shapeData);
-				        console.log("svg",svg);
-				        console.log("svgGrp",svgGrp);
-				        switch(connectorKey) {
-                                             case 'top':
-                                               console.log('top');
-							//shapeData.position.x = 0; 
-							//shapeData.position.y = 0;
-							//shapeData.position.x -= 1; 
-							//shapeData.position.y -= 1;
-							//shapeData.width  = 200;
-							//shapeData.height = 200;
-							//drawPosition();
-					    var circles = svgGrp.getElementsByTagName("circle");
-                                              console.log(circles);
-                                           
-                                            for (let i = 0; i < circles.length; i++) {
-                                              //console.log(circles[i]);
-                                              console.log(circles[i].getAttribute("data-key"));
-                                              if (circles[i].getAttribute("data-key") == "main") {
-                                                     console.log(circles[i]);
-                                                    var r = Number(circles[i].getAttribute("r"));
-                                                    circles[i].setAttribute("r",  r + 10);
-                                              
-                                              } else if (circles[i].getAttribute("data-key") == "top") {
-                                                     console.log(circles[i]);
-                                                    var cy = Number(circles[i].getAttribute("cy"));
-                                                    circles[i].setAttribute("cy",  cy - 10);
-                                              }
-                                               //        my_circle.setAttribute("r", my_r * n);
-                                             
-                                            }
-                                            //circles.forEach(function(element){
-                                            //    console.log(element);
-                                            //});
-
-                                               break;
-                                             case 'bottom':
-                                               console.log('bottom');
-                                               break;
-                                             case 'right':
-                                               console.log('right');
-                                               break;
-                                             case 'left':
-                                               console.log('left');
-                                               break;
-                                             default:
-                                               console.log('none');
-                                        }
-
-			  } else {
+			  if (!evt.ctrlKey) {
 				/* path add */
+				moveProcReset();
                                 
 				const pathEl = path(svg, canvasData, {
 					s: { shape: { shapeEl: svgGrp, connectorKey } },
