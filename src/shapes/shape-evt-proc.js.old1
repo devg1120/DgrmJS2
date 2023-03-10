@@ -124,29 +124,6 @@ function shapeEditEvtProc(svg, canvasData, svgGrp, shapeData, connectorsInnerPos
 	};
 }
 
-function top_risize( evt, canvasData, svgGrp ) {
-   var circles = svgGrp.getElementsByTagName("circle");
-  
-   for (let i = 0; i < circles.length; i++) {
-     //console.log(circles[i]);
-     //console.log(circles[i].getAttribute("data-key"));
-     if (circles[i].getAttribute("data-key") == "main") {
-           var r = Number(circles[i].getAttribute("r"));
-           circles[i].setAttribute("r",  r + 1);
-     
-     } else if (circles[i].getAttribute("data-key") == "top") {
-           var cy = Number(circles[i].getAttribute("cy"));
-           circles[i].setAttribute("cy",  cy - 1);
-     }
-      //        my_circle.setAttribute("r", my_r * n);
-    
-   }
-   //circles.forEach(function(element){
-   //    console.log(element);
-   //});
-
-}
-
 /**
  * provides:
  *  - shape move
@@ -180,10 +157,15 @@ function shapeEvtProc(svg, canvasData, svgGrp, shapeData, connectorsInnerPositio
 	      switch(connectorKey) {
                    case 'top':
                      console.log('top');
-                     top_risize( evt, canvasData, svgGrp );
-                     break;
-/*
+	      		//shapeData.position.x = 0; 
+	      		//shapeData.position.y = 0;
+	      		//shapeData.position.x -= 1; 
+	      		//shapeData.position.y -= 1;
+	      		//shapeData.width  = 200;
+	      		//shapeData.height = 200;
+	      		//drawPosition();
 	          var circles = svgGrp.getElementsByTagName("circle");
+                    console.log(circles);
                  
                   for (let i = 0; i < circles.length; i++) {
                     //console.log(circles[i]);
@@ -206,7 +188,6 @@ function shapeEvtProc(svg, canvasData, svgGrp, shapeData, connectorsInnerPositio
                   //});
 
                      break;
-*/
                    case 'bottom':
                      console.log('bottom');
                      break;
